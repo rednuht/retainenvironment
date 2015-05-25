@@ -29,9 +29,8 @@ public class BuildStepListenerImpl extends BuildStepListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(BuildStepListenerImpl.class);
     private static final String RETAIN_ENV_FILE_KEY_NAME = "ENVFILE";
 
-
     @Override
-    public void started(AbstractBuild build, BuildStep bs, BuildListener listener) {
+    public void started(final AbstractBuild build, final BuildStep bs, final BuildListener listener) {
         final RetainEnvironmentProperty retainEnvironmentProperty = getEnvPropertyForBuild(build);
         if (retainEnvironmentProperty.isActive()) {
             EnvContributeAction envContributeAction = build.getAction(EnvContributeAction.class);
@@ -61,7 +60,7 @@ public class BuildStepListenerImpl extends BuildStepListener {
     }
 
     @Override
-    public void finished(AbstractBuild build, BuildStep bs, BuildListener listener, boolean canContinue) {
+    public void finished(final AbstractBuild build, final BuildStep bs, final BuildListener listener, final boolean canContinue) {
         final RetainEnvironmentProperty retainEnvironmentProperty = getEnvPropertyForBuild(build);
         if (retainEnvironmentProperty.isActive()) {
             final EnvContributeAction envContributeAction = build.getAction(EnvContributeAction.class);
@@ -75,7 +74,7 @@ public class BuildStepListenerImpl extends BuildStepListener {
                         for (String line : lines) {
                             final String[] split = line.split("=");
                             if (split.length > 1) {
-                                map.put(split[0], split[1]);
+                                map.put(split[0].trim(), split[1].trim());
                             }
                         }
                         envContributeAction.putAllEnvsToMap(map);
