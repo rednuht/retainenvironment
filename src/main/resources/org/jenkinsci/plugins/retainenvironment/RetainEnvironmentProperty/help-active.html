@@ -1,0 +1,19 @@
+<div>
+    Environment Retainer will store your environment across build steps, including post build steps.<br> To achieve this
+    the environment is saved in a file between build steps, the file is stored in a user specified path and the file is
+    named 'jobName-buildNumber'.<br>
+    To save the environment simply save the variables you want as key value pairs, separated by "=", in the retainer
+    file which can be found in the $ENVFILE variable.
+
+    <pre>
+        <b>An example:</b>
+        env > $ENVFILE
+    </pre>
+    <pre>
+        <b>Another example:</b>
+        KEY="myKey"
+        VALUE=`myExecutable`
+        echo $KEY=$VALUE > $ENVFILE
+    </pre>
+
+</div>
